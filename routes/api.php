@@ -18,14 +18,31 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/', function () {
+    echo 'api path';
+});
+
 Route::get('/date', function () {
-    //return view('welcome');
-    $date2 = new DateTime("1732-04-14"); 
-    $date1 = new DateTime();
-    // $diff = date_diff($date1,$date2);
-    $interval = $date1->diff($date2);
-    // echo json_encode($interval);
-    echo "difference " . $interval->days . " days ";
+
+    // $date2 = new DateTime("1732-04-14"); 
+    // $date1 = new DateTime();
+    // $interval = $date1->diff($date2);
+    // echo "difference " . $interval->days . " days ";
+
+    echo strtotime('now') - strtotime('14-04-1732') . ' seconds have passed since 1732-04-14';
+});
+
+
+Route::get('/palindrome', function () {
+    $array = $_GET['array'];
+    $nbr_of_palindrom = 0;
+    foreach($array as $str){
+        $revString = strrev($str);
+        if ($revString == $str){ 
+            $nbr_of_palindrom += 1;
+        }
+    };
+    echo strval($nbr_of_palindrom);
 });
 
 Route::get('/beer', function () {
@@ -34,16 +51,9 @@ Route::get('/beer', function () {
     echo json_encode($json[rand(0,24)]->ingredients);
 });
 
-Route::get('/palindrome', function () {
-    function Palindrome($MyString){
-        $revString = strrev($MyString);
-        if ($revString == $MyString){ 
-            echo $MyString." is a Palindrome string. <br>"; 
-        } else { 
-            echo $MyString." is not a Palindrome string. <br>"; 
-        } 
-    };
-    Palindrome("radar"); 
-    Palindrome("rubber"); 
-    Palindrome("malayalam");
+Route::get('/jokes', function () {
+    $json = file_get_contents("https://icanhazdadjoke.com/slack");
+    $json = json_decode($json);
+    $json = $json->attachments;
+    echo json_encode($json[0]->text);
 });
