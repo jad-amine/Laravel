@@ -19,7 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/', function () {
-    echo 'api path';
+    echo 'api path' . '<br>' . '"/date" for time difference from 1732-04-14'. 
+    '<br>' . '"/palindrom" to find palindrom in arrays'. '<br>' . '"/beer" to find beer ingredients'
+    . '<br>' . '"/jokes" to get the latest dad jokes'. '<br>' . '/';
 });
 
 Route::get('/date', function () {
@@ -28,7 +30,6 @@ Route::get('/date', function () {
     // $date1 = new DateTime();
     // $interval = $date1->diff($date2);
     // echo "difference " . $interval->days . " days ";
-
     echo strtotime('now') - strtotime('14-04-1732') . ' seconds have passed since 1732-04-14';
 });
 
@@ -56,4 +57,17 @@ Route::get('/jokes', function () {
     $json = json_decode($json);
     $json = $json->attachments;
     echo json_encode($json[0]->text);
+});
+
+Route::get('/array', function () {
+    $len = rand(5,10);
+    $a = range(1, $len);
+    while(count($a)>0){
+        $team = [];
+        $rand = rand(0, count($a)-1);
+        array_push($team, array_splice($a, $rand, 1));
+        $rand = rand(0, count($a) -1);
+        array_push($team, array_splice($a, $rand, 1));
+        echo json_encode($team) . '<br>';
+    }
 });
