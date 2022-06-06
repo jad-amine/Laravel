@@ -33,3 +33,17 @@ Route::get('/beer', function () {
     $json = json_decode($json);
     echo json_encode($json[rand(0,24)]->ingredients);
 });
+
+Route::get('/palindrome', function () {
+    function Palindrome($MyString){
+        $revString = strrev($MyString);
+        if ($revString == $MyString){ 
+            echo $MyString." is a Palindrome string. <br>"; 
+        } else { 
+            echo $MyString." is not a Palindrome string. <br>"; 
+        } 
+    };
+    Palindrome("radar"); 
+    Palindrome("rubber"); 
+    Palindrome("malayalam");
+});
