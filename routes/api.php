@@ -71,3 +71,9 @@ Route::get('/array', function () {
         echo json_encode($team) . '<br>';
     }
 });
+
+Route::get('/nominee', function () {
+    $students = ['jad', 'pablo', 'ali', 'mhamad', 'stephanelle', 'anthony', 'pablo', 'pablo'];
+    $rand = rand(0,6);
+    echo "the nominee is $students[$rand]" . '<br>' . 'pablo has a 3/8 probability';
+});
