@@ -30,21 +30,6 @@ Route::get('/beer', [AssignmentController::class, 'beer']);
 
 Route::get('/jokes', [AssignmentController::class, 'jokes']);
 
-Route::get('/array', function () {
-    $len = rand(5,10);
-    $a = range(1, $len);
-    while(count($a)>0){
-        $team = [];
-        $rand = rand(0, count($a)-1);
-        array_push($team, array_splice($a, $rand, 1));
-        $rand = rand(0, count($a) -1);
-        array_push($team, array_splice($a, $rand, 1));
-        echo json_encode($team) . '<br>';
-    }
-});
+Route::get('/array', [AssignmentController::class, 'array']);
 
-Route::get('/nominee', function () {
-    $students = ['jad', 'pablo', 'ali', 'mhamad', 'stephanelle', 'anthony', 'pablo', 'pablo'];
-    $rand = rand(0,6);
-    echo "the nominee is $students[$rand]" . '<br>' . 'pablo has a 3/8 probability';
-});
+Route::get('/nominee', [AssignmentController::class, 'nominee']);

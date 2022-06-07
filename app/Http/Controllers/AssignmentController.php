@@ -39,4 +39,23 @@ class assignmentController extends Controller
         $json = $json->attachments;
         return $json[0]->text;
     }
+
+    public function array() {
+        $len = rand(5,10);
+        $students = range(1, $len);
+        while(count($students) > 0){
+            $team = [];
+            $rand = rand(0, count($students)-1);
+            array_push($team, array_splice($students, $rand, 1));
+            $rand = rand(0, count($students) -1);
+            array_push($team, array_splice($students, $rand, 1));
+            echo json_encode($team) . '<br>';
+        }
+    }
+
+    public function nominee() {
+        $students = ['jad', 'pablo', 'ali', 'mhamad', 'stephanelle', 'anthony', 'pablo', 'pablo'];
+        $rand = rand(0,6);
+        return "the nominee is $students[$rand]" . '<br>' . 'pablo has a 3/8 probability';
+    }
 }
